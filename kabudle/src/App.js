@@ -7,7 +7,7 @@ import Add from "./pages/Add.tsx";
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 
-import "dotenv/config";
+// import "dotenv/config";
 
 function App() {
   return (
