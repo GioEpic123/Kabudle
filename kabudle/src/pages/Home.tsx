@@ -46,11 +46,12 @@ function RecipeList() {
 
     getDocs(q)
       .then((querySnapshot) => {
+        //Save data and take note that we're done
         setSnapshot(querySnapshot);
         setLoadState(DONE_STRING);
-        console.log(querySnapshot);
       })
       .catch((err) => {
+        //Save error to display to user
         setLoadState(ERROR_STRING);
         setError(err);
       });
@@ -80,6 +81,19 @@ function RecipeList() {
                 <div className="recipe-listing">
                   <h3>{val.data().title}</h3>
                   <h4>{val.data().cookTime} minutes</h4>
+                  {val.data().photoURL === undefined ? (
+                    <img
+                      className="listing-thumbnail"
+                      src="https://cdnb.artstation.com/p/assets/images/images/011/033/539/large/cathleen-obrien-chefcat.jpg?1527528854"
+                      alt="Cat Chef"
+                    />
+                  ) : (
+                    <img
+                      className="listing-thumbnail"
+                      src={val.data().photoURL}
+                      alt="Someone's Meal"
+                    />
+                  )}
                 </div>
               );
             })}

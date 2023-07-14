@@ -1,14 +1,12 @@
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
   getFirestore,
   collection,
   addDoc,
-  doc,
-  setDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
@@ -43,6 +41,7 @@ function RecipeWriter() {
   const [ingredients, setIngredients] = useState("");
   //TODO: Get steps in a list format
   const [directions, setDirections] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
 
   //Reference to the "recipe" collection
   const recipeRef = collection(db, "recipe");
@@ -62,6 +61,7 @@ function RecipeWriter() {
       cookTime: cookTime,
       ingredients: ingredients,
       directions: directions,
+      photoURL: photoURL,
     });
 
     //On completion, navigate the user to the home page
@@ -86,11 +86,11 @@ function RecipeWriter() {
           />
         </div>
         <div>
-          <label>Cook Time (Minutes): </label>
+          <label>Cook Time (in Minutes): </label>
           <input
             value={cookTime}
             type="text"
-            placeholder="5 minutes"
+            placeholder="5 (do not write 'minutes')"
             onChange={(e) => setCookTime(e.target.value)}
           />
         </div>
@@ -110,6 +110,15 @@ function RecipeWriter() {
             type="text"
             placeholder="Place in Toaster for 2 minutes. Let Cool for 2 more. Enjoy!"
             onChange={(e) => setDirections(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Add a photo URL to showcase your work of art! </label>
+          <input
+            value={photoURL}
+            type="text"
+            placeholder="http://photo.com"
+            onChange={(e) => setPhotoURL(e.target.value)}
           />
         </div>
         <div className="btns">
