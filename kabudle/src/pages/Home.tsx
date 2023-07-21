@@ -4,8 +4,11 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-import app from "../DBConnect.js";
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
+
+// Already Initialized SDK in another file for re-use
+import app from "../DBConnect.js";
+const db = getFirestore(app);
 
 // Constant strings for use in react "useState" hooks (like semaphores)
 const LOADING_STRING = "loading";
@@ -30,8 +33,6 @@ function Home() {
     </div>
   );
 }
-
-const db = getFirestore(app);
 
 //Generate a list of recipes after API call returns, show "loading" otherwise
 function RecipeList() {
