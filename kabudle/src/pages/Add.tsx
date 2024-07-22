@@ -34,6 +34,7 @@ function Add() {
 // Generate a form to write a recipe onto the database
 function RecipeWriter() {
   const navigate = useNavigate();
+  const recipeRef = collection(db, "recipe");
 
   //These values are set by the form on completion
   const [title, setTitle] = useState("");
@@ -43,9 +44,7 @@ function RecipeWriter() {
   const [directions, setDirections] = useState("");
   const [photoURL, setPhotoURL] = useState("");
 
-  //Reference to the "recipe" collection
-  const recipeRef = collection(db, "recipe");
-
+  
   //When form is submitted, it calls this function to write the recipe to db
   const saveUserData = async (e) => {
     // Prevent page refresh when form is submitted

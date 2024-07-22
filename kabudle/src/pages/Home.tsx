@@ -79,11 +79,14 @@ function RecipeList() {
           <h2>Number of Recipes: {snapshot?.docs.length}</h2>
           <div>
             {snapshot?.docs.map((val, key) => {
+              const data = val.data();
               return (
+                <a href={`/recipe/${val.id}`}>
                 <div className="recipe-listing">
-                  <h3>{val.data().title}</h3>
-                  <h4>{val.data().cookTime} minutes</h4>
-                  {val.data().photoURL === undefined ? (
+                  <h3>{data.title}</h3>
+                  <p>(Temp)ID: {val.id}</p>
+                  <h4>{data.cookTime} minutes</h4>
+                  {data.photoURL === undefined || data.photoURL === "" ? (
                     <img
                       className="listing-thumbnail"
                       src="https://cdnb.artstation.com/p/assets/images/images/011/033/539/large/cathleen-obrien-chefcat.jpg?1527528854"
@@ -97,6 +100,7 @@ function RecipeList() {
                     />
                   )}
                 </div>
+                </a>
               );
             })}
           </div>

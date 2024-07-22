@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
+
 import React, { useEffect, useState } from "react";
 import {
   getDoc,
@@ -12,6 +13,7 @@ import {
   where,
   QuerySnapshot,
   DocumentSnapshot,
+  DocumentData
 } from "firebase/firestore";
 
 import app from "../DBConnect.js";
@@ -19,9 +21,10 @@ import CatAnimation from "./CatAnimation.tsx";
 
 const db = getFirestore(app);
 
+const RECIPE_STRING = "recipe";
+
 const LOADING_STRING = "loading";
 const ERROR_STRING = "error";
-const RECIPE_STRING = "recipe";
 const DONE_STRING = "done";
 
 function Recipe() {
@@ -38,7 +41,6 @@ function Recipe() {
       <a href="/add">Add a Recipe</a>
       <br></br>
       <PopulateRecipe recipeID={recipeID} />
-      <CatAnimation />
     </div>
   );
 }
@@ -46,7 +48,7 @@ function Recipe() {
 // Shows the recipe's Page if it exists, and displays a 404 otherwise
 function PopulateRecipe(props) {
   const [loadState, setLoadState] = useState(LOADING_STRING);
-  const [docSnap, setDocSnap] = useState({});
+  const [docSnap, setDocSnap] = useState<DocumentSnapshot<DocumentData> | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -79,20 +81,25 @@ function PopulateRecipe(props) {
         <h2>Loading</h2>
       ) : (
         <div>
-          {!docSnap.exists() ? (
+          {!docSnap?.exists() ? ( // Change the condition to match the message
             <h1>Doc Doesn't Exist!</h1>
           ) : (
-            <div>
-              <h2>{docSnap.data().title}</h2>
-              {/* To:do - Change input from one text block to multiple ones */}
-              <h3>{docSnap.data().cookTime} minutes</h3>
-              <br></br>
-              <h4>Ingredients:</h4>
-              <p>{docSnap.data().ingredients}</p>
-              <br></br>
-              <h4>Directions:</h4>
-              <p>{docSnap.data().directions}</p>
-            </div>
+            (() => { // Self-invoking function to safely access docSnap data
+              const data = docSnap.data();
+              return (
+                <div>
+                  <h2>{data.title}</h2>
+                  {/* To-do - Change input from one text block to multiple ones */}
+                  <h3>{data.cookTime} minutes</h3>
+                  <br></br>
+                  <h4>Ingredients:</h4>
+                  <p>{data.ingredients}</p>
+                  <br></br>
+                  <h4>Directions:</h4>
+                  <p>{data.directions}</p>
+                </div>
+              );
+            })()
           )}
         </div>
       )}
