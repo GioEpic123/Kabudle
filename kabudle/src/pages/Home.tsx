@@ -2,6 +2,7 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
@@ -38,7 +39,7 @@ function Home() {
 function RecipeList() {
   // Variables to track API status
   const [loadState, setLoadState] = useState(LOADING_STRING);
-  const [snapshot, setSnapshot] = useState({});
+  const [snapshot, setSnapshot] = useState<QuerySnapshot<DocumentData> | null>(null);
   const [error, setError] = useState("");
 
   //Make an API Call when page is loaded
@@ -54,7 +55,7 @@ function RecipeList() {
       .catch((err) => {
         //Save error to display to user
         setLoadState(ERROR_STRING);
-        setError(err);
+        setError(err.message);
       });
   }, []);
 
@@ -75,9 +76,9 @@ function RecipeList() {
         <h2>Loading</h2>
       ) : (
         <div>
-          <h2>Number of Recipes: {snapshot.docs.length}</h2>
+          <h2>Number of Recipes: {snapshot?.docs.length}</h2>
           <div>
-            {snapshot.docs.map((val, key) => {
+            {snapshot?.docs.map((val, key) => {
               return (
                 <div className="recipe-listing">
                   <h3>{val.data().title}</h3>
