@@ -1,3 +1,8 @@
+* {
+	/* Placeholder Background */
+	background-color: rgb(133, 181, 181);
+}
+
 .App {
 	text-align: center;
 }

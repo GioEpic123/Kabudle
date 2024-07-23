@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// Boilerplate CSS
-import "../App.css";
 
 //Firebase
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -14,6 +12,8 @@ import {
 } from "firebase/firestore";
 import app from "../util/DBConnect.js";
 
+// Boilerplate CSS
+import "../App.css";
 import Navbar from "../components/Navbar.tsx";
 
 const db = getFirestore(app);
@@ -32,7 +32,7 @@ function Add() {
 				<a href="/favorites">Favorites</a>
 			</div>
 			{user ? (
-				<RecipeWriter />
+				<RecipeWriter user={user} />
 			) : (
 				<div>
 					<p>
@@ -48,7 +48,7 @@ function Add() {
 }
 
 // Generate a form to write a recipe onto the database
-function RecipeWriter() {
+function RecipeWriter({ user }) {
 	const navigate = useNavigate();
 	const recipeRef = collection(db, "recipe");
 
@@ -60,29 +60,43 @@ function RecipeWriter() {
 	const [directions, setDirections] = useState("");
 	const [photoURL, setPhotoURL] = useState("");
 
-	//When form is submitted, it calls this function to write the recipe to db
+	// --> Migrate to a state object
+
+	// One state holds all of the form's fields
+	const [formData, setFormData] = useState({
+		title: "",
+		cookTime: "",
+		ingredients: "",
+		directions: "",
+		photoURL: "",
+	});
+
+	// Writes recipe to DB on submit
 	const saveUserData = async (e) => {
-		// Prevent page refresh when form is submitted
 		e.preventDefault();
 
-		//TODO: Get User Email & Name to add to recipe page
-
-		//Creates the recipe on the "recipe" collection auto-generating an ID
+		// Writes recipe with auto-generated ID
 		await addDoc(recipeRef, {
+			...formData,
 			createdAt: serverTimestamp(),
-			ID: "anonymous",
-			title: title,
-			cookTime: cookTime,
-			ingredients: ingredients,
-			directions: directions,
-			photoURL: photoURL,
+			creatorName: user?.displayName,
+			creatorEmail: user?.email,
 		});
 
-		//On completion, navigate the user to the home page
+		// Photo optional
+		if (
+			!formData.title ||
+			!formData.cookTime ||
+			!formData.ingredients ||
+			!formData.directions
+		) {
+			alert("Please fill out all required fields.");
+			return;
+		}
+
+		// Go home on completion
 		navigate("/");
 	};
-
-	//Return the form to input user data
 
 	return (
 		<div className="RecipeWriter">
@@ -127,7 +141,9 @@ function RecipeWriter() {
 					/>
 				</div>
 				<div>
-					<label>Add a photo URL to showcase your work of art! </label>
+					<label>
+						(Optional) - Add a photo URL to showcase your work of art!{" "}
+					</label>
 					<input
 						value={photoURL}
 						type="text"
