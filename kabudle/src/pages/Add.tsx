@@ -34,7 +34,13 @@ function Add() {
 			{user ? (
 				<RecipeWriter />
 			) : (
-				<div>Log in to contribute your own, delicious recipies to Kabudle!</div>
+				<div>
+					<p>
+						Hey There! It appears you'd like to contribute, but your logged
+						out...
+					</p>
+					<p>Log in to contribute your own, delicious recipies to Kabudle!</p>
+				</div>
 			)}
 			<div></div>
 		</div>
