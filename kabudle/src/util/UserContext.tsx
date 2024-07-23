@@ -2,11 +2,22 @@ import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import app from "../util/DBConnect.js";
 
+/**
+ * Creates a UserContext that we can use to globally grab our user
+ *
+ * Usage:
+ * import { UserContext } from '../util/UserContext.tsx';
+ * //...
+ * function Something(){
+ * 	  const user = useContext(UserContext);
+ * }
+ **/
+
 export const UserContext = createContext<User | null>(null);
 
 // Provide user to other files
 // - UserProvider is a callback, taking children
-export const UserProvider = ({ children }: { children: ReactNode} ) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
 	// May cause an issue, as can't assign user to null. If so, change type
 	const [user, setUser] = useState<User | null>(null);
 
@@ -19,12 +30,7 @@ export const UserProvider = ({ children }: { children: ReactNode} ) => {
 		});
 		// Cleanup subscription on unmount
 		return () => unsubscribe();
-
 	}, []);
 
-	return (
-		<UserContext.Provider value={user}>
-			{children}
-		</UserContext.Provider>
-	);
+	return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
