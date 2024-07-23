@@ -1,34 +1,17 @@
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
   getFirestore,
   collection,
   addDoc,
-  doc,
-  setDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import app from "../DBConnect.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "kabudle.firebaseapp.com",
-  projectId: "kabudle",
-  storageBucket: "kabudle.appspot.com",
-  messagingSenderId: "515753945489",
-  appId: process.env.REACT_APP_APP_ID,
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 function Add() {
@@ -51,6 +34,7 @@ function Add() {
 // Generate a form to write a recipe onto the database
 function RecipeWriter() {
   const navigate = useNavigate();
+  const recipeRef = collection(db, "recipe");
 
   //These values are set by the form on completion
   const [title, setTitle] = useState("");
@@ -58,10 +42,9 @@ function RecipeWriter() {
   const [ingredients, setIngredients] = useState("");
   //TODO: Get steps in a list format
   const [directions, setDirections] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
 
-  //Reference to the "recipe" collection
-  const recipeRef = collection(db, "recipe");
-
+  
   //When form is submitted, it calls this function to write the recipe to db
   const saveUserData = async (e) => {
     // Prevent page refresh when form is submitted
@@ -77,6 +60,7 @@ function RecipeWriter() {
       cookTime: cookTime,
       ingredients: ingredients,
       directions: directions,
+      photoURL: photoURL,
     });
 
     //On completion, navigate the user to the home page
@@ -101,11 +85,11 @@ function RecipeWriter() {
           />
         </div>
         <div>
-          <label>Cook Time (Minutes): </label>
+          <label>Cook Time (in Minutes): </label>
           <input
             value={cookTime}
             type="text"
-            placeholder="5 minutes"
+            placeholder="5 (do not write 'minutes')"
             onChange={(e) => setCookTime(e.target.value)}
           />
         </div>
@@ -125,6 +109,15 @@ function RecipeWriter() {
             type="text"
             placeholder="Place in Toaster for 2 minutes. Let Cool for 2 more. Enjoy!"
             onChange={(e) => setDirections(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Add a photo URL to showcase your work of art! </label>
+          <input
+            value={photoURL}
+            type="text"
+            placeholder="http://photo.com"
+            onChange={(e) => setPhotoURL(e.target.value)}
           />
         </div>
         <div className="btns">
