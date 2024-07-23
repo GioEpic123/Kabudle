@@ -71,17 +71,18 @@ function RecipeWriter({ user }) {
 		photoURL: "",
 	});
 
+	//Updates saved info on page change
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
+
 	// Writes recipe to DB on submit
 	const saveUserData = async (e) => {
 		e.preventDefault();
-
-		// Writes recipe with auto-generated ID
-		await addDoc(recipeRef, {
-			...formData,
-			createdAt: serverTimestamp(),
-			creatorName: user?.displayName,
-			creatorEmail: user?.email,
-		});
 
 		// Photo optional
 		if (
@@ -93,6 +94,14 @@ function RecipeWriter({ user }) {
 			alert("Please fill out all required fields.");
 			return;
 		}
+
+		// Writes recipe with auto-generated ID
+		await addDoc(recipeRef, {
+			...formData,
+			createdAt: serverTimestamp(),
+			creatorName: user?.displayName,
+			creatorEmail: user?.email,
+		});
 
 		// Go home on completion
 		navigate("/");
@@ -107,48 +116,51 @@ function RecipeWriter({ user }) {
 				<div>
 					<label>Title: </label>
 					<input
-						value={title}
+						name="title"
+						value={formData.title}
 						type="text"
 						placeholder="Toast"
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={handleChange}
 					/>
 				</div>
 				<div>
 					<label>Cook Time (in Minutes): </label>
 					<input
-						value={cookTime}
+						name="cookTime"
+						value={formData.cookTime}
 						type="text"
 						placeholder="5 (do not write 'minutes')"
-						onChange={(e) => setCookTime(e.target.value)}
+						onChange={handleChange}
 					/>
 				</div>
 				<div>
 					<label>Ingredients: </label>
 					<input
-						value={ingredients}
+						name="ingredients"
+						value={formData.ingredients}
 						type="text"
 						placeholder="One slice of Bread"
-						onChange={(e) => setIngredients(e.target.value)}
+						onChange={handleChange}
 					/>
 				</div>
 				<div>
 					<label>Directions: </label>
 					<input
-						value={directions}
+						name="directions"
+						value={formData.directions}
 						type="text"
 						placeholder="Place in Toaster for 2 minutes. Let Cool for 2 more. Enjoy!"
-						onChange={(e) => setDirections(e.target.value)}
+						onChange={handleChange}
 					/>
 				</div>
 				<div>
-					<label>
-						(Optional) - Add a photo URL to showcase your work of art!{" "}
-					</label>
+					<label>Add a photo URL to showcase your work of art! </label>
 					<input
-						value={photoURL}
+						name="photoURL"
+						value={formData.photoURL}
 						type="text"
 						placeholder="http://photo.com"
-						onChange={(e) => setPhotoURL(e.target.value)}
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="btns">
