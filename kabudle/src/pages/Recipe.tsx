@@ -16,7 +16,7 @@ import {
   DocumentData
 } from "firebase/firestore";
 
-import app from "../DBConnect.js";
+import app from "../util/DBConnect.js";
 import CatAnimation from "./CatAnimation.tsx";
 
 const db = getFirestore(app);

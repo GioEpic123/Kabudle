@@ -10,7 +10,7 @@ import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 import Navbar from "../components/Navbar.tsx"
 
 // Already Initialized SDK in another file for re-use
-import app from "../DBConnect.js";
+import app from "../util/DBConnect.js";
 const db = getFirestore(app);
 
 // Constant strings for use in react "useState" hooks (like semaphores)

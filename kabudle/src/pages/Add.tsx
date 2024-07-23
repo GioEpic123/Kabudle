@@ -12,7 +12,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import app from "../DBConnect.js";
+import app from "../util/DBConnect.js";
 
 const db = getFirestore(app);
 

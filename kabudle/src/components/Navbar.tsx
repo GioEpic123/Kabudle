@@ -1,6 +1,6 @@
 import React from "react";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import app from "../DBConnect.js"; // Make sure this file correctly initializes your Firebase app
+import app from "../util/DBConnect.js"; // Make sure this file correctly initializes your Firebase app
 
 function Navbar() {
 
