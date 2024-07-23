@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
 
+import Navbar from "../components/Navbar.tsx"
+
 import {
   getFirestore,
   collection,
@@ -18,6 +20,7 @@ function Add() {
   return (
     <div>
       <div>
+        <Navbar/>
         <h1>Welcome to the Recipe Writer!</h1>
         <h2>You + Me is a hell of a recipe ~ 3 ~ : </h2>
         <a href="/">Home</a>

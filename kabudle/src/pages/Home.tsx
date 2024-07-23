@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 
+import Navbar from "../components/Navbar.tsx"
+
 // Already Initialized SDK in another file for re-use
 import app from "../DBConnect.js";
 const db = getFirestore(app);
@@ -22,7 +24,7 @@ function Home() {
   return (
     <div>
       <div>
-        <h1>The Kitten Kabudle</h1>
+        <Navbar/>
         <h2>I'm always home when I'm with you ^3^</h2>
         <a href="/favorites">Favorites</a>
         <br></br>

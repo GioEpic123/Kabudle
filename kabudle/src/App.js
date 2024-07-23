@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import Home from "./pages/Home.tsx";
@@ -11,18 +10,18 @@ import React from "react";
 // import "dotenv/config";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/add" element={<Add />} />
-        <Route path="/recipe">
-          <Route path=":recipeID" element={<Recipe />} />
-        </Route>
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/favorites" element={<Favorites />} />
+				<Route path="/add" element={<Add />} />
+				<Route path="/recipe">
+					<Route path=":recipeID" element={<Recipe />} />
+				</Route>
+			</Routes>
+		</div>
+	);
 }
 
 export default App;

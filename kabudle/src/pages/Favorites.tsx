@@ -5,10 +5,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // ?? Idk what this does
 //import { useAuthState } from "react-firebase-hooks/auth";
 import React from "react";
+import Navbar from "../components/Navbar.tsx"
+
 
 function Favorites() {
   return (
     <div>
+      <Navbar/>
       <h1>You're my favorite ;)</h1>
       <a href="/">Home</a>
       <br></br>
