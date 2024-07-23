@@ -1,15 +1,11 @@
-import "../App.css";
-import { useNavigate } from "react-router-dom";
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar.tsx"
+import "../App.css";
 
+// Firebase
+import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 
-import Navbar from "../components/Navbar.tsx"
-
-// Already Initialized SDK in another file for re-use
 import app from "../util/DBConnect.js";
 const db = getFirestore(app);
 
