@@ -1,0 +1,131 @@
+This may be a start to a recipe writer with steps:
+
+function RecipeWriter({ user }) {
+    const navigate = useNavigate();
+    const recipeRef = collection(db, "recipe");
+
+    const [formData, setFormData] = useState({
+        title: "",
+        cookTime: "",
+        ingredients: "",
+        directions: [""], // Initialize with one empty step
+        photoURL: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleDirectionChange = (index, value) => {
+        const newDirections = [...formData.directions];
+        newDirections[index] = value;
+        setFormData((prevState) => ({
+            ...prevState,
+            directions: newDirections,
+        }));
+    };
+
+    const addDirection = () => {
+        setFormData((prevState) => ({
+            ...prevState,
+            directions: [...prevState.directions, ""],
+        }));
+    };
+
+    const saveUserData = async (e) => {
+        e.preventDefault();
+
+        if (!formData.title || !formData.cookTime || !formData.ingredients || !formData.directions || !formData.photoURL) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        await addDoc(recipeRef, {
+            ...formData,
+            createdAt: serverTimestamp(),
+            ID: user?.id || "anonymous",
+        });
+
+        navigate("/");
+    };
+
+    return (
+        <div className="RecipeWriter">
+            <form className="recipe-writer-form" onSubmit={saveUserData}>
+                <h2>
+                    Please enter your recipe to be saved. Once finished, hit Submit below!
+                </h2>
+                <div>
+                    <label>Title: </label>
+                    <input
+                        name="title"
+                        value={formData.title}
+                        type="text"
+                        placeholder="Toast"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Cook Time (in Minutes): </label>
+                    <input
+                        name="cookTime"
+                        value={formData.cookTime}
+                        type="text"
+                        placeholder="5 (do not write 'minutes')"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Ingredients: </label>
+                    <input
+                        name="ingredients"
+                        value={formData.ingredients}
+                        type="text"
+                        placeholder="One slice of Bread"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Directions: </label>
+                    {formData.directions.map((direction, index) => (
+                        <div key={index}>
+                            <input
+                                name={`direction-${index}`}
+                                value={direction}
+                                type="text"
+                                placeholder={`Step ${index + 1}`}
+                                onChange={(e) => handleDirectionChange(index, e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        addDirection();
+                                    }
+                                }}
+                            />
+                        </div>
+                    ))}
+                    <button type="button" onClick={addDirection}>+</button>
+                </div>
+                <div>
+                    <label>Add a photo URL to showcase your work of art! </label>
+                    <input
+                        name="photoURL"
+                        value={formData.photoURL}
+                        type="text"
+                        placeholder="http://photo.com"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="btns">
+                    <button className="submit-btn" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+}
