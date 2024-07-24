@@ -34,10 +34,14 @@ function Navbar() {
 	};
 
 	return (
-		<span>
-			<h1>The Kitten Kabudle</h1>
+		<div className="navbar">
+			<span>
+				<h1>The Kitten Kabudle</h1>
+				<p>by Giovanni and Alexis Quevedo</p>
+			</span>
+
 			<a href="/">Home</a>
-			<br></br>
+			<a href="/favorites">Favorites</a>
 			<a href="/add">Add a Recipe</a>
 			{user ? (
 				<div>
@@ -52,7 +56,7 @@ function Navbar() {
 			) : (
 				<button onClick={handleGoogleSignIn}>Sign in with Google</button>
 			)}
-		</span>
+		</div>
 	);
 }
 
