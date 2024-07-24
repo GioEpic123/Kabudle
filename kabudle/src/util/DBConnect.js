@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "kabudle.firebaseapp.com",
-  projectId: "kabudle",
-  storageBucket: "kabudle.appspot.com",
-  messagingSenderId: "515753945489",
-  appId: process.env.REACT_APP_APP_ID,
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: "kabudle.firebaseapp.com",
+	projectId: "kabudle",
+	storageBucket: "kabudle.appspot.com",
+	messagingSenderId: "515753945489",
+	appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase

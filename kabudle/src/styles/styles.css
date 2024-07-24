@@ -1,0 +1,31 @@
+* {
+	/* Placeholder Background */
+	background-color: rgb(133, 181, 181);
+}
+
+.App {
+	text-align: center;
+}
+
+.recipe-tile {
+	border-style: groove;
+	max-width: 50%;
+}
+
+.listing-thumbnail {
+	width: 100%;
+}
+
+/* Recipe Page */
+
+.recipe-listing {
+	display: flex;
+	justify-content: space-between;
+}
+
+.recipe-page-photo {
+	outline: 5rem;
+	outline-color: black;
+	height: 45%;
+	width: 45%;
+}
