@@ -12,8 +12,6 @@ import {
 } from "firebase/firestore";
 import app from "../util/DBConnect.js";
 
-// Boilerplate CSS
-import "../App.css";
 import Navbar from "../components/Navbar.tsx";
 
 const db = getFirestore(app);

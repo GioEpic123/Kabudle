@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar.tsx";
-import "../App.css";
 
 // Firebase
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 
 import app from "../util/DBConnect.js";
-import { SEMAPHORES, RECIPE_COLLECTION } from "../util/Constants.js";
+import { SEMAPHORES, RECIPE_COLLECTION } from "../util/constants.js";
 const db = getFirestore(app);
 
 // Constant strings for use in react "useState" hooks (like semaphores)
@@ -79,7 +78,7 @@ function RecipeList() {
 							const data = val.data();
 							return (
 								<a href={`/recipe/${val.id}`}>
-									<div className="recipe-listing">
+									<div className="recipe-tile">
 										<h3>{data.title}</h3>
 										<p>(Temp)ID: {val.id}</p>
 										<h4>{data.cookTime} minutes</h4>

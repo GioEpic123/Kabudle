@@ -1,4 +1,3 @@
-import "../App.css";
 // ?? Idk what this does
 //import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useContext } from "react";

@@ -1,5 +1,3 @@
-import "./App.css";
-
 import Home from "./pages/Home.tsx";
 import Favorites from "./pages/Favorites.tsx";
 import Add from "./pages/Add.tsx";
