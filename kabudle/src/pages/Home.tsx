@@ -18,9 +18,6 @@ function Home() {
 			<div>
 				<Navbar />
 				<h2>I'm always home when I'm with you ^3^</h2>
-				<a href="/favorites">Favorites</a>
-				<br></br>
-				<a href="/add">Add a Recipe</a>
 			</div>
 			<div>
 				<RecipeList />

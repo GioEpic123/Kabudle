@@ -29,3 +29,17 @@
 	height: 45%;
 	width: 45%;
 }
+
+/* COMPONENTS: */
+
+/* Nav */
+
+.navbar {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	border: solid;
+	border-width: 2px;
+	border-color: black;
+}
