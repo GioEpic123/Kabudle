@@ -12,13 +12,10 @@ const db = getFirestore(app);
 function Home() {
 	return (
 		<div>
-			<div>
-				<Navbar />
-				<h2>I'm always home when I'm with you ^3^</h2>
-			</div>
-			<div>
-				<RecipeList />
-			</div>
+			<Navbar />
+			<h1>Home</h1>
+			<h3>I'm always home when I'm with you ^3^</h3>
+			<RecipeList />
 		</div>
 	);
 }

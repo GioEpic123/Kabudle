@@ -20,14 +20,9 @@ function Add() {
 
 	return (
 		<div>
-			<div>
-				<Navbar />
-				<h1>Welcome to the Recipe Writer!</h1>
-				<h2>You + Me is a hell of a recipe ~ 3 ~ : </h2>
-				<a href="/">Home</a>
-				<br></br>
-				<a href="/favorites">Favorites</a>
-			</div>
+			<Navbar />
+			<h1>Recipe Writer</h1>
+			<h3>You + Me is a hell of a recipe ~ 3 ~ : </h3>
 			{user ? (
 				<RecipeWriter user={user} />
 			) : (

@@ -23,10 +23,9 @@ function SearchPage() {
 		<div>
 			<div>
 				<Navbar />
-				<h2>Look and see, I'm never too far :D</h2>
+				<h2>Look for me and see, I'm never too far :D</h2>
 			</div>
 			<div>
-				<p>Attempting search for: {searchString}</p>
 				<SearchResults searchString={searchString} />
 			</div>
 		</div>
@@ -74,7 +73,7 @@ function SearchResults(props) {
 	if (loadState === SEMAPHORES.ERROR) {
 		return (
 			<div>
-				<h2>Error Loading recipes:</h2>
+				<h2>Error when searching:</h2>
 				<p>{error}</p>
 			</div>
 		);
@@ -84,7 +83,7 @@ function SearchResults(props) {
 	return (
 		<div>
 			{loadState === SEMAPHORES.LOADING ? (
-				<h2>Loading</h2>
+				<h2>Searching for "{props.searchString}"...</h2>
 			) : (
 				<div>
 					<h2>Results: {snapshot?.docs.length}</h2>

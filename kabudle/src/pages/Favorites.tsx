@@ -10,10 +10,8 @@ function Favorites() {
 	return (
 		<div>
 			<Navbar />
-			<h1>You're my favorite ;)</h1>
-			<a href="/">Home</a>
-			<br></br>
-			<a href="/add">Add a Recipe</a>
+			<h1>Favorites</h1>
+			<h3>You're my favorite ;)</h3>
 			{user ? (
 				//user
 				<div>
