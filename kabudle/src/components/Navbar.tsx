@@ -6,7 +6,9 @@ import {
 	signOut,
 } from "firebase/auth";
 import app from "../util/DBConnect";
+
 import { UserContext } from "../util/UserContext.tsx";
+import SearchBar from "./SearchBar.tsx";
 
 function Navbar() {
 	const user = useContext(UserContext);
@@ -40,6 +42,7 @@ function Navbar() {
 				<p>by Giovanni and Alexis Quevedo</p>
 			</span>
 
+			<SearchBar />
 			<a href="/">Home</a>
 			<a href="/favorites">Favorites</a>
 			<a href="/add">Add a Recipe</a>

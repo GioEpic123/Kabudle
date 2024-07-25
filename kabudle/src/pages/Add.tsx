@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Firebase
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { UserContext } from "../util/UserContext.tsx";
 import {
 	getFirestore,

@@ -43,6 +43,11 @@ function PopulateRecipe(props) {
 
 	// Get doc using API
 	useEffect(() => {
+		if (!props.recipeID) {
+			setLoadState(SEMAPHORES.ERROR);
+			setError("No recipe string provided!");
+			return;
+		}
 		const docRef = doc(db, RECIPE_COLLECTION, props.recipeID);
 		getDoc(docRef)
 			.then((docSnap) => {

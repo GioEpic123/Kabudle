@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar.tsx";
+import { useParams, useNavigate } from "react-router-dom";
 
 // Firebase
-import { QuerySnapshot, DocumentData } from "firebase/firestore";
+import { QuerySnapshot, DocumentData, where } from "firebase/firestore";
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 
 import app from "../util/DBConnect.js";
-import { SEMAPHORES, RECIPE_COLLECTION } from "../util/constants.js";
+import Navbar from "../components/Navbar.tsx";
+import {
+	SEMAPHORES,
+	RECIPE_COLLECTION,
+	HIGH_UNI_CHAR,
+} from "../util/constants.js";
+
 const db = getFirestore(app);
 
-function Home() {
+function SearchPage() {
+	const params = useParams();
+	const { searchString } = params;
+
 	return (
 		<div>
 			<div>
 				<Navbar />
-				<h2>I'm always home when I'm with you ^3^</h2>
+				<h2>Look and see, I'm never too far :D</h2>
 			</div>
 			<div>
-				<RecipeList />
+				<p>Attempting search for: {searchString}</p>
+				<SearchResults searchString={searchString} />
 			</div>
 		</div>
 	);
 }
 
-//Generate a list of recipes after API call returns, show "loading" otherwise
-function RecipeList() {
+//Show results of search query when ready, show "loading" otherwise
+function SearchResults(props) {
 	// Variables to track API status
 	const [loadState, setLoadState] = useState(SEMAPHORES.LOADING);
 	const [snapshot, setSnapshot] = useState<QuerySnapshot<DocumentData> | null>(
@@ -32,9 +42,20 @@ function RecipeList() {
 	);
 	const [error, setError] = useState("");
 
+	const navigate = useNavigate();
+
 	//Make an API Call when page is loaded
 	useEffect(() => {
-		const q = query(collection(db, RECIPE_COLLECTION));
+		if (!props.searchString) {
+			navigate("/");
+			return;
+		}
+
+		const q = query(
+			collection(db, RECIPE_COLLECTION),
+			where("title", ">=", props.searchString),
+			where("title", "<=", props.searchString + HIGH_UNI_CHAR)
+		);
 
 		getDocs(q)
 			.then((querySnapshot) => {
@@ -66,7 +87,7 @@ function RecipeList() {
 				<h2>Loading</h2>
 			) : (
 				<div>
-					<h2>Number of Recipes: {snapshot?.docs.length}</h2>
+					<h2>Results: {snapshot?.docs.length}</h2>
 					<div>
 						{snapshot?.docs.map((val, key) => {
 							const data = val.data();
@@ -100,4 +121,4 @@ function RecipeList() {
 	);
 }
 
-export default Home;
+export default SearchPage;
