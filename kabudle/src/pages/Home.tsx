@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar.tsx";
 
 // Firebase
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
-import { query, getFirestore, collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 
 import app, { firestoreDB } from "../util/DBConnect.js";
 import { SEMAPHORES, RECIPE_COLLECTION } from "../util/constants.js";

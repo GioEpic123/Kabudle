@@ -1,7 +1,7 @@
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 // Algolia 3rd party search:
-import algoliasearch from "algoliasearch/lite";
+import algoliasearch from "algoliasearch";
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_API_KEY,

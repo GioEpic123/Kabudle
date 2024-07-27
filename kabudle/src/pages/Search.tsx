@@ -3,17 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 
 // Firebase
 import { QuerySnapshot, DocumentData, where } from "firebase/firestore";
-import { query, getFirestore, collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 
-import app from "../util/DBConnect.js";
+import app, { firestoreDB } from "../util/DBConnect.js";
 import Navbar from "../components/Navbar.tsx";
 import {
 	SEMAPHORES,
 	RECIPE_COLLECTION,
 	HIGH_UNI_CHAR,
 } from "../util/constants.js";
-
-const db = getFirestore(app);
 
 function SearchPage() {
 	const params = useParams();
@@ -51,7 +49,7 @@ function SearchResults(props) {
 		}
 
 		const q = query(
-			collection(db, RECIPE_COLLECTION),
+			collection(firestoreDB, RECIPE_COLLECTION),
 			where("title", ">=", props.searchString),
 			where("title", "<=", props.searchString + HIGH_UNI_CHAR)
 		);
