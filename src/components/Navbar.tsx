@@ -5,7 +5,7 @@ import {
 	signInWithPopup,
 	signOut,
 } from "firebase/auth";
-import app from "../util/DBConnect";
+import app from "../util/DBConnect.js";
 
 import { UserContext } from "../util/UserContext.tsx";
 import SearchBar from "./SearchBar.tsx";

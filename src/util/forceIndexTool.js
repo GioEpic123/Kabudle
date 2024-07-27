@@ -3,7 +3,8 @@
 // SHOULD NOT SHIP WITH THIS OUT
 
 import { collection, getDocs } from "firebase/firestore";
-import { index, firestoreDB } from "./DBConnect.js";
+import { firestoreDB } from "./DBConnect.js";
+import index from "./algolia.js";
 
 async function indexRecipes() {
 	const recipesSnapshot = await getDocs(collection(firestoreDB, "recipes"));

@@ -1,4 +1,6 @@
-import algoliasearch from "algoliasearch/lite";
+//Enables 3rd party searching with Algolia
+
+import algoliasearch from "algoliasearch";
 
 const client = algoliasearch(
 	process.env.ALGOLIA_APP_ID,

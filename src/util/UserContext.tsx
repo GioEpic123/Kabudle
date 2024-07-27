@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import app from "../util/DBConnect.js";
+import app from "./DBConnect.js";
 
 /**
  * Creates a UserContext that we can use to globally grab our user
