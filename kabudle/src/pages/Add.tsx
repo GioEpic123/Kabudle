@@ -9,11 +9,9 @@ import {
 	addDoc,
 	serverTimestamp,
 } from "firebase/firestore";
-import app from "../util/DBConnect.js";
+import app, { firestoreDB } from "../util/DBConnect.js";
 
 import Navbar from "../components/Navbar.tsx";
-
-const db = getFirestore(app);
 
 function Add() {
 	const user = useContext(UserContext);
@@ -42,7 +40,7 @@ function Add() {
 // Generate a form to write a recipe onto the database
 function RecipeWriter({ user }) {
 	const navigate = useNavigate();
-	const recipeRef = collection(db, "recipe");
+	const recipeRef = collection(firestoreDB, "recipe");
 
 	//These values are set by the form on completion
 	const [title, setTitle] = useState("");

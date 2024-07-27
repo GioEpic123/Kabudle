@@ -5,9 +5,8 @@ import Navbar from "../components/Navbar.tsx";
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { query, getFirestore, collection, getDocs } from "firebase/firestore";
 
-import app from "../util/DBConnect.js";
+import app, { firestoreDB } from "../util/DBConnect.js";
 import { SEMAPHORES, RECIPE_COLLECTION } from "../util/constants.js";
-const db = getFirestore(app);
 
 function Home() {
 	return (
@@ -31,7 +30,7 @@ function RecipeList() {
 
 	//Make an API Call when page is loaded
 	useEffect(() => {
-		const q = query(collection(db, RECIPE_COLLECTION));
+		const q = query(collection(firestoreDB, RECIPE_COLLECTION));
 
 		getDocs(q)
 			.then((querySnapshot) => {

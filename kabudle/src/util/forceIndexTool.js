@@ -4,6 +4,7 @@
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+import { index } from "./DBConnect";
 
 async function indexRecipes() {
 	const recipesSnapshot = await getDocs(collection(db, "recipes"));

@@ -6,6 +6,7 @@ import Favorites from "./pages/Favorites.tsx";
 import Add from "./pages/Add.tsx";
 import Recipe from "./pages/Recipe.tsx";
 import Search from "./pages/Search.tsx";
+import ForceIndex from "./pages/forceIndexPage.tsx";
 
 // import "dotenv/config";
 
@@ -22,6 +23,7 @@ function App() {
 				<Route path="/search" element={<Search />}>
 					<Route path=":searchString" element={<Search />} />
 				</Route>
+				<Route path="/forceIndex" element={<ForceIndex />} />
 			</Routes>
 		</div>
 	);
