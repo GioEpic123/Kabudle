@@ -8,8 +8,8 @@ import Recipe from "./pages/Recipe.tsx";
 import Search from "./pages/Search.tsx";
 import ForceIndex from "./pages/forceIndexPage.tsx";
 
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 function App() {
 	return (

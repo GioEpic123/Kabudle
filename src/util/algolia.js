@@ -5,16 +5,18 @@ import { RECIPE_COLLECTION } from "./constants";
 
 // When env gets working
 const client = algoliasearch(
-	process.env.ALGOLIA_APP_ID,
-	process.env.ALGOLIA_ADMIN_API_KEY
+	process.env.REACT_APP_ALGOLIA_APP_ID,
+	process.env.REACT_APP_ALGOLIA_ADMIN_API_KEY
 );
 
 const index = client.initIndex(RECIPE_COLLECTION);
 console.log(
 	"Algolia creds: " +
-		process.env.ALGOLIA_APP_ID +
+		process.env.REACT_APP_ALGOLIA_APP_ID +
 		" " +
-		process.env.ALGOLIA_ADMIN_API_KEY
+		process.env.REACT_APP_ALGOLIA_ADMIN_API_KEY +
+		" Index: " +
+		index
 );
 
 export default index;
