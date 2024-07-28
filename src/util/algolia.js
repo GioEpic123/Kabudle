@@ -10,13 +10,5 @@ const client = algoliasearch(
 );
 
 const index = client.initIndex(RECIPE_COLLECTION);
-console.log(
-	"Algolia creds: " +
-		process.env.REACT_APP_ALGOLIA_APP_ID +
-		" " +
-		process.env.REACT_APP_ALGOLIA_ADMIN_API_KEY +
-		" Index: " +
-		index
-);
 
 export default index;
