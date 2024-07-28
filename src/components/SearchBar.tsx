@@ -5,11 +5,13 @@ function SearchBar() {
 	const [searchText, setSearchText] = useState("");
 	const navigate = useNavigate();
 
-	const handleChange = (e) => {
+	const handleChange = (e: {
+		target: { value: React.SetStateAction<string> };
+	}) => {
 		setSearchText(e.target.value);
 	};
 
-	const performSearch = (e) => {
+	const performSearch = (_e: any) => {
 		//navigate to search page
 		navigate(`/search/${searchText}`);
 	};

@@ -7,6 +7,7 @@ import { firestoreDB } from "./DBConnect.js";
 import index from "./algolia.js";
 
 async function indexRecipes() {
+	console.log("Indexing...");
 	const recipesSnapshot = await getDocs(collection(firestoreDB, "recipes"));
 	const recipes = recipesSnapshot.docs.map((doc) => ({
 		objectID: doc.id,

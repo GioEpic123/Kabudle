@@ -2,16 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Firebase
-import { UserContext } from "../util/UserContext.tsx";
-import {
-	getFirestore,
-	collection,
-	addDoc,
-	serverTimestamp,
-} from "firebase/firestore";
-import app, { firestoreDB } from "../util/DBConnect.js";
+import { UserContext } from "../util/UserContext";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { firestoreDB } from "../util/DBConnect.js";
 
-import Navbar from "../components/Navbar.tsx";
+import Navbar from "../components/Navbar";
 
 function Add() {
 	const user = useContext(UserContext);
@@ -41,16 +36,6 @@ function Add() {
 function RecipeWriter({ user }) {
 	const navigate = useNavigate();
 	const recipeRef = collection(firestoreDB, "recipe");
-
-	//These values are set by the form on completion
-	const [title, setTitle] = useState("");
-	const [cookTime, setCookTime] = useState("");
-	const [ingredients, setIngredients] = useState("");
-	//TODO: Get steps in a list format
-	const [directions, setDirections] = useState("");
-	const [photoURL, setPhotoURL] = useState("");
-
-	// --> Migrate to a state object
 
 	// One state holds all of the form's fields
 	const [formData, setFormData] = useState({

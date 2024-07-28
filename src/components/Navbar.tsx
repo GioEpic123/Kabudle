@@ -7,8 +7,8 @@ import {
 } from "firebase/auth";
 import app from "../util/DBConnect.js";
 
-import { UserContext } from "../util/UserContext.tsx";
-import SearchBar from "./SearchBar.tsx";
+import { UserContext } from "../util/UserContext";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
 	const user = useContext(UserContext);

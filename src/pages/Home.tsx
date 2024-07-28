@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar.tsx";
+import Navbar from "../components/Navbar";
 
 // Firebase
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { query, collection, getDocs } from "firebase/firestore";
 
-import app, { firestoreDB } from "../util/DBConnect.js";
+import { firestoreDB } from "../util/DBConnect.js";
 import { SEMAPHORES, RECIPE_COLLECTION } from "../util/constants.js";
 
 function Home() {

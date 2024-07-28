@@ -5,8 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { QuerySnapshot, DocumentData, where } from "firebase/firestore";
 import { query, collection, getDocs } from "firebase/firestore";
 
-import app, { firestoreDB } from "../util/DBConnect.js";
-import Navbar from "../components/Navbar.tsx";
+import { firestoreDB } from "../util/DBConnect.js";
+import Navbar from "../components/Navbar";
 import {
 	SEMAPHORES,
 	RECIPE_COLLECTION,

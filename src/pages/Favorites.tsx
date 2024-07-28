@@ -1,8 +1,8 @@
 // ?? Idk what this does
 //import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useContext } from "react";
-import Navbar from "../components/Navbar.tsx";
-import { UserContext } from "../util/UserContext.tsx";
+import Navbar from "../components/Navbar";
+import { UserContext } from "../util/UserContext";
 
 function Favorites() {
 	const user = useContext(UserContext);

@@ -15,7 +15,7 @@ import {
 	RECIPE_COLLECTION,
 	PLACEHOLDER_FOOD,
 } from "../util/constants.js";
-import Navbar from "../components/Navbar.tsx";
+import Navbar from "../components/Navbar";
 import "../styles/styles.css";
 
 const db = getFirestore(app);

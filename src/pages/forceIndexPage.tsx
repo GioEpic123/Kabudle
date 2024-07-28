@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
-import Navbar from "../components/Navbar.tsx";
-import { UserContext } from "../util/UserContext.tsx";
+import React from "react";
+import Navbar from "../components/Navbar";
 import indexRecipes from "../util/forceIndexTool.js";
 
 // Util page to force an index update
 
 function ForceIndexPage() {
-	const user = useContext(UserContext);
-
 	return (
 		<div>
 			<Navbar />
