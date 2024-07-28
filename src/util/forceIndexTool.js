@@ -5,16 +5,17 @@
 import { collection, getDocs } from "firebase/firestore";
 import { firestoreDB } from "./DBConnect.js";
 import index from "./algolia.js";
+import { RECIPE_COLLECTION } from "./constants.js";
 
 async function indexRecipes() {
 	console.log("Indexing...");
-	const recipesSnapshot = await getDocs(collection(firestoreDB, "recipe"));
+	const recipesSnapshot = await getDocs(
+		collection(firestoreDB, RECIPE_COLLECTION)
+	);
 	const recipes = recipesSnapshot.docs.map((doc) => ({
 		objectID: doc.id,
 		...doc.data(),
 	}));
-
-	console.log(" Recipies: " + recipes.length);
 
 	index
 		.saveObjects(recipes)
